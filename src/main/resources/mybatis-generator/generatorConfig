@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!-- 数据库配置文件 -->
+    <properties resource="application-local.properties" />
+
+    <context id="MysqlTables" defaultModelType="flat" targetRuntime="MyBatis3">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 配置内置的或者自定义的Plugin -->
+        <!-- 插件自定义的类需要单独打包,并放入 pom文件的 mybatis generator plugin的依赖中 -->
+        <plugin type="com.yyj.plugin.MapperBaseAndXmlBlobPlugin" />
+        <plugin type="com.yyj.plugin.ModelExampleCancelPlugin" />
+        <plugin type="com.yyj.plugin.SqlMapPagerAndParameterPlugin" />
+        <plugin type="com.yyj.plugin.ModelAnnotationPlugin" />
+
+        <!--关闭注释 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!--数据库连接信息 -->
+        <jdbcConnection driverClass="${mybatis.generator.config.driverClass}"
+                        connectionURL="${mybatis.generator.config.connectionURL}"
+                        userId="${mybatis.generator.config.userId}"
+                        password="${mybatis.generator.config.password}">
+        </jdbcConnection>
+
+        <!-- 修改默认类型映射关系,将数据库的 bit 类型(tinyint)映射成model 中的 Integer -->
+        <javaTypeResolver type="com.yyj.springbootscaffold.mybatis.config.CrmJavaTypeResolverDefaultImpl"></javaTypeResolver>
+
+        <!-- domain 包路径 -->
+        <javaModelGenerator targetPackage="${mybatis.generator.config.model.targetPackage}" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- xml 路径 -->
+        <sqlMapGenerator targetPackage="${mybatis.generator.config.sqlMap.targetPackage}"  targetProject="src/main/resources/mapper">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- dao 路径 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${mybatis.generator.config.client.targetPackage}"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table tableName="${mybatis.generator.config.tableName}" domainObjectName="${mybatis.generator.config.objectName}">
+        </table>
+
+    </context>
+</generatorConfiguration>
