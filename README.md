@@ -9,6 +9,8 @@ spring boot 项目基础功能搭建
     3. 实现分页，使用 offset+limit 实现。
     4. 配合参数查询，实现HttpServletRequest 查询参数转换成 通用Example（BaseExample）查询，依赖 Model 中每个属性添加@Colunm 注解，注解值为数据库对应字段名。
     5. 自定义了 Mybatis Generator 插件，位于包：com.yyj.springbootscaffold.mybatis.generator.plugins。引用的插件需要单独打包，并且在 pom 引入插件 Mybatis generator中添加依赖。
+    6. 全部不使用 Blob类型。
+    7. tinyBit会映射成 Java类型的Boolean，修改映射成Integer。
 * 配置多数据源，主从，事务
     1. 多数据源和主从使用同一种思路解决。项目的基础数据库主从命名为DataSourceType.MASTER和DataSourceType.SLAVE,另加的数据源需要定义 annotation,并标注在具体的 Mapper类上来指定数据源。
     2. 数据源配置在DataSourceConfig类中。routeDataSource（）方法初始化支持的数据源，其中另加的数据源的放入map 中的 key 为注解的名称，为 AOP 动态切换数据源服务。
