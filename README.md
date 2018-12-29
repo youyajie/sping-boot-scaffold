@@ -17,8 +17,10 @@ spring boot 项目基础功能搭建
     3. 切面 DataSourceAsp 用来动态切换数据源，还支持 Mapper 接口中方法参数不为空的检查。动态切换的逻辑，Mapper 类中是否有自定义数据源的注解，有的话，取对应的数据源。无则判断在事务中或者以"insert, update..."开头的方法，则使用项目配置的主数据源，其他则使用从数据源。Mapper接口方法参数有判断不为空的场景，使用注解@NotNull（javax.validation.constraints.NotNull）实现。
     4. 事务沿用 spring boot 支持的@tranditional注解。在需要的方法上添加。
 ### 2.缓存部分
+**缓存连接池使用了2版实现，jedis 和 Lettuce**
 * 多数据源
+2版都支持多个缓存源配置
 * 使用 redisTemplate操作缓存，中间切库查询
+2版都是用redisTemplate操作缓存，jedis 的实现中一个缓存源对应一个redisTemplate，在操作时，根据库进行 select 操作不同库。lettuce的实现中，一个缓存源的一个库对应一个redisTemplate，在操作时根据不同的库更换redisTemplate操作。
 * 使用模板模式，封装基础操作
-
 **添加功能为使用项目中整理出来，原项目中经过测试，整理出来未重新测试。**
