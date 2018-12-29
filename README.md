@@ -23,4 +23,6 @@ spring boot 项目基础功能搭建
 * 使用 redisTemplate操作缓存，中间切库查询
 2版都是用redisTemplate操作缓存，jedis 的实现中一个缓存源对应一个redisTemplate，在操作时，根据库进行 select 操作不同库。lettuce的实现中，一个缓存源的一个库对应一个redisTemplate，在操作时根据不同的库更换redisTemplate操作。
 * 使用模板模式，封装基础操作
+
+
 **添加功能为使用项目中整理出来，原项目中经过测试，整理出来未重新测试。**
