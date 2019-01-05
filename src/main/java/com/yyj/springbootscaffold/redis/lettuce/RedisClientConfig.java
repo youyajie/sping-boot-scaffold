@@ -46,6 +46,8 @@ public class RedisClientConfig {
         genericObjectPoolConfig.setMinIdle(poolProperties.getMinIdle());
         genericObjectPoolConfig.setMaxTotal(poolProperties.getMaxActive());
         genericObjectPoolConfig.setMaxWaitMillis(poolProperties.getMaxWait().toMillis());
+        genericObjectPoolConfig.setTestOnBorrow(true);
+        genericObjectPoolConfig.setTestWhileIdle(true);
         return genericObjectPoolConfig;
     }
 
